@@ -18,6 +18,6 @@ export default class CharacterCard extends Phaser.Image {
 
     // Add the sprite to the game.
     this.game.add.existing(this);
-    this.anchor.setTo(0.5);
+    this.anchor.setTo(...character.anchor);
   }
 }

@@ -1,5 +1,6 @@
 import BaseState from './BaseState';
 import IntroBg from '../objects/IntroBg';
+import CharacterCard from '../objects/CharacterCard';
 
 /**
  * Setup and display the character selection state.
@@ -30,6 +31,11 @@ export default class CharacterSelect extends BaseState {
     this.chooseCharText.anchor.setTo(0.5, 0);
 
     this.game.add.existing(this.chooseCharText);
+
+    this.playerOneCard = new CharacterCard({
+      game: this.game,
+      charIdx: 0,
+    });
   }
 
   /**

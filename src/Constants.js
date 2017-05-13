@@ -12,14 +12,16 @@ export const CHARACTERS = [
   {
     name: 'Linus',
     key: 'character-card-linus',
-    x: 0,
-    y: 0,
+    x: 76,
+    y: 52,
+    anchor: [0, 0],
   },
   {
     name: 'Luke',
     key: 'character-card-luke',
     x: 0,
     y: 0,
+    anchor: [0, 1],
   },
 ];
 
