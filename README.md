@@ -1,5 +1,7 @@
 # Scrapyard Wars Game - UI
 
+![Scrapyard Wars Game Title Screen](https://media.giphy.com/media/Bm4KksEZ2mUlW/giphy.gif)
+
 This is the UI for the 2 player co-op Scrapyard Wars game.
 
 It was built using [Phaser.js](https://phaser.io/) (graphics), [Howler.js](https://howlerjs.com/) (audio), and [Webpack](https://webpack.js.org/) (asset management). Based off of the [Phaser ES6 Boilerplate](https://github.com/goldfire/phaser-boilerplate/).
