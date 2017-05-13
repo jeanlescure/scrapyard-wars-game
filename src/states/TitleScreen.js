@@ -31,6 +31,18 @@ export default class TitleScreen extends BaseState {
       src: [introMusic],
       loop: true,
     }).play();
+
+    const titleClickHandler = function titleClickHandler() {
+      new howler.Howl({
+        src: [selectedSound],
+        loop: false,
+      }).play();
+
+      this.game.state.start('CharacterSelect');
+    };
+
+    this.titleSprite.inputEnabled = true;
+    this.titleSprite.events.onInputDown.add(titleClickHandler, this);
   }
 
   /**
