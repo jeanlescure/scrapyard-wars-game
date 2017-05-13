@@ -24,6 +24,13 @@ export const CHARACTERS = [
 ];
 
 // Animations
+export const INTRO_BG_ANIMATIONS = [
+  {
+    name: 'fire',
+    frames: Array.from(Array(15).keys()), // Array: [ 0 ... 63 ]
+    speed: 10,
+  },
+];
 export const LINUS_ANIMATIONS = [
   {
     name: 'wait',
