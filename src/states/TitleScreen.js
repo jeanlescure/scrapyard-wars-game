@@ -1,4 +1,10 @@
+import howler from 'howler';
 import BaseState from './BaseState';
+import IntroBg from '../objects/IntroBg';
+import IntroTitle from '../objects/IntroTitle';
+
+import introMusic from '../assets/audio/intro-music.mp3';
+import selectedSound from '../assets/audio/selected.mp3';
 
 /**
  * Setup and display the main game state.
@@ -8,8 +14,35 @@ export default class TitleScreen extends BaseState {
    * Setup all objects, etc needed for the main game state.
    */
   create() {
-    // Enable arcade physics.
-    this.game.physics.startSystem(Phaser.Physics.ARCADE);
+    this.addUpdateable(new IntroBg({
+      game: this.game,
+      x: 0,
+      y: 0,
+    }));
+
+    this.titleSprite = new IntroTitle({
+      game: this.game,
+      x: 0,
+      y: 0,
+    });
+    this.addUpdateable(this.titleSprite);
+
+    new howler.Howl({
+      src: [introMusic],
+      loop: true,
+    }).play();
+
+    const titleClickHandler = function titleClickHandler() {
+      new howler.Howl({
+        src: [selectedSound],
+        loop: false,
+      }).play();
+
+      this.game.state.start('CharacterSelect');
+    };
+
+    this.titleSprite.inputEnabled = true;
+    this.titleSprite.events.onInputDown.add(titleClickHandler, this);
   }
 
   /**
@@ -17,9 +50,5 @@ export default class TitleScreen extends BaseState {
    */
   update() {
     BaseState.update.call(this);
-
-    if (this.game.input.activePointer.isDown) {
-      this.game.state.start('CharacterSelect');
-    }
   }
 }
