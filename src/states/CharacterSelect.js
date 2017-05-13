@@ -1,19 +1,23 @@
 import BaseState from './BaseState';
+import IntroBg from '../objects/IntroBg';
 
 /**
- * Setup and display the main game state.
+ * Setup and display the character selection state.
  */
 export default class CharacterSelect extends BaseState {
   /**
-   * Setup all objects, etc needed for the main game state.
+   * Setup all objects, etc needed for the character selection state.
    */
   create() {
-    // Enable arcade physics.
-    this.game.physics.startSystem(Phaser.Physics.ARCADE);
+    this.addUpdateable(new IntroBg({
+      game: this.game,
+      x: 0,
+      y: 0,
+    }));
   }
 
   /**
-   * Handle actions in the main game loop.
+   * Handle actions in the character selection loop.
    */
   update() {
     BaseState.update.call(this);

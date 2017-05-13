@@ -7,11 +7,11 @@ import introMusic from '../assets/audio/intro-music.mp3';
 import selectedSound from '../assets/audio/selected.mp3';
 
 /**
- * Setup and display the main game state.
+ * Setup and display the title screen state.
  */
 export default class TitleScreen extends BaseState {
   /**
-   * Setup all objects, etc needed for the main game state.
+   * Setup all objects, etc needed for the title screen state.
    */
   create() {
     this.addUpdateable(new IntroBg({
@@ -46,7 +46,7 @@ export default class TitleScreen extends BaseState {
   }
 
   /**
-   * Handle actions in the main game loop.
+   * Handle actions in the title screen loop.
    */
   update() {
     BaseState.update.call(this);
