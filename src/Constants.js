@@ -19,9 +19,9 @@ export const CHARACTERS = [
   {
     name: 'Luke',
     key: 'character-card-luke',
-    x: 0,
-    y: 0,
-    anchor: [0, 1],
+    x: 615,
+    y: 52,
+    anchor: [1, 0],
   },
 ];
 

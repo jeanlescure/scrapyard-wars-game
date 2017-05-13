@@ -36,6 +36,11 @@ export default class CharacterSelect extends BaseState {
       game: this.game,
       charIdx: 0,
     });
+
+    this.playerTwoCard = new CharacterCard({
+      game: this.game,
+      charIdx: 1,
+    });
   }
 
   /**
