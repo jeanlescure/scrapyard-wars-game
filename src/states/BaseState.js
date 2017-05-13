@@ -26,8 +26,11 @@ export default class BaseState extends Phaser.State {
   static update() {
     if (this.game.canvas.style.marginTop !== this.marginTopValue) {
       window.dispatchEvent(new Event('resize'));
+
       this.game.canvas.style.marginTop = this.marginTopValue;
       this.game.canvas.style.marginLeft = this.marginLeftValue;
+
+      this.scale.setGameSize(WIDTH, HEIGHT);
     }
 
     _.each(this.updateables, (u) => {
@@ -48,8 +51,6 @@ export default class BaseState extends Phaser.State {
    * Resize the game to fit the window.
    */
   resize() {
-    this.scale.setGameSize(WIDTH, HEIGHT);
-
     this.marginTopValue = `-${Math.ceil(this.game.canvas.offsetHeight / 2)}px`;
     this.marginLeftValue = `-${Math.ceil(this.game.canvas.offsetWidth / 2)}px`;
   }
