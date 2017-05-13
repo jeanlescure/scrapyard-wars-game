@@ -31,6 +31,13 @@ export const INTRO_BG_ANIMATIONS = [
     speed: 10,
   },
 ];
+export const INTRO_TITLE_ANIMATIONS = [
+  {
+    name: 'blink',
+    frames: [0, 1],
+    speed: 1,
+  },
+];
 export const LINUS_ANIMATIONS = [
   {
     name: 'wait',

@@ -1,5 +1,6 @@
 import BaseState from './BaseState';
 import IntroBg from '../objects/IntroBg';
+import IntroTitle from '../objects/IntroTitle';
 
 /**
  * Setup and display the main game state.
@@ -14,6 +15,13 @@ export default class TitleScreen extends BaseState {
       x: 0,
       y: 0,
     }));
+
+    this.titleSprite = new IntroTitle({
+      game: this.game,
+      x: 0,
+      y: 0,
+    });
+    this.addUpdateable(this.titleSprite);
   }
 
   /**
@@ -21,9 +29,5 @@ export default class TitleScreen extends BaseState {
    */
   update() {
     BaseState.update.call(this);
-
-    if (this.game.input.activePointer.isDown) {
-      this.game.state.start('CharacterSelect');
-    }
   }
 }
