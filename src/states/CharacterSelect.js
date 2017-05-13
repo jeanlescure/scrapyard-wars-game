@@ -14,6 +14,22 @@ export default class CharacterSelect extends BaseState {
       x: 0,
       y: 0,
     }));
+
+    const chooseCharTextArgs = [
+      this.game, // game
+      this.game.world.centerX, // x
+      16, // y
+      'SELECT YOUR CHARACTER', // text
+      {
+        font: 'normal 28px Press Start 2P',
+        fill: '#ffffff',
+      },
+    ];
+
+    this.chooseCharText = new Phaser.Text(...chooseCharTextArgs);
+    this.chooseCharText.anchor.setTo(0.5, 0);
+
+    this.game.add.existing(this.chooseCharText);
   }
 
   /**
