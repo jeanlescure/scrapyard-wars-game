@@ -1,6 +1,10 @@
+import howler from 'howler';
 import BaseState from './BaseState';
 import IntroBg from '../objects/IntroBg';
 import IntroTitle from '../objects/IntroTitle';
+
+import introMusic from '../assets/audio/intro-music.mp3';
+import selectedSound from '../assets/audio/selected.mp3';
 
 /**
  * Setup and display the main game state.
@@ -22,6 +26,11 @@ export default class TitleScreen extends BaseState {
       y: 0,
     });
     this.addUpdateable(this.titleSprite);
+
+    new howler.Howl({
+      src: [introMusic],
+      loop: true,
+    }).play();
   }
 
   /**
