@@ -1,4 +1,5 @@
 import BaseState from './BaseState';
+import IntroBg from '../objects/IntroBg';
 
 /**
  * Setup and display the main game state.
@@ -8,8 +9,11 @@ export default class TitleScreen extends BaseState {
    * Setup all objects, etc needed for the main game state.
    */
   create() {
-    // Enable arcade physics.
-    this.game.physics.startSystem(Phaser.Physics.ARCADE);
+    this.addUpdateable(new IntroBg({
+      game: this.game,
+      x: 0,
+      y: 0,
+    }));
   }
 
   /**
