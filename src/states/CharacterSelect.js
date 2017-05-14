@@ -1,3 +1,5 @@
+import ShortUniqueId from 'short-unique-id';
+
 import BaseState from './BaseState';
 import IntroBg from '../objects/IntroBg';
 import CharacterCard from '../objects/CharacterCard';
@@ -36,7 +38,11 @@ export default class CharacterSelect extends BaseState {
       game: this.game,
       charIdx: 0,
       clickCallback: () => {
+        const uid = new ShortUniqueId();
+
         this.game.world.store.player.character = 0;
+        this.game.world.store.match.uid = uid.randomUUID(6);
+
         this.game.world.store.howlManager.playHowl('selected');
         this.HideCharacterCards();
       },
