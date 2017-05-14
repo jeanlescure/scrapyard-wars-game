@@ -66,7 +66,7 @@ export const LINUS_ANIMATIONS = [
     speed: 4,
   },
 ];
-export const CONVEYOR_ANIMATIONS = [
+export const CONVEYOR_BELT_ANIMATIONS = [
   {
     name: 'move',
     frames: Array.from(Array(64).keys()), // Array: [ 0 ... 63 ]

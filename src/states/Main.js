@@ -1,7 +1,8 @@
 import BaseState from './BaseState';
 import GameBg from '../objects/GameBg';
+import ConveyorBelt from '../objects/ConveyorBelt';
 import Linus from '../objects/Linus';
-import {HEIGHT} from '../Constants';
+import {WIDTH, HEIGHT} from '../Constants';
 
 /**
  * Setup and display the main game state.
@@ -22,12 +23,21 @@ export default class Main extends BaseState {
       y: 0,
     });
 
+    this.conveyorBelt = new ConveyorBelt({
+      game: this.game,
+      x: 0,
+      y: 0,
+      width: WIDTH * 2,
+      height: 128,
+    });
+
     this.playerOne = new Linus({
       game: this.game,
       x: this.game.world.centerX,
       y: HEIGHT,
     });
 
+    this.addUpdateable(this.conveyorBelt);
     this.addUpdateable(this.playerOne);
 
     this.game.world.store.howlManager.playSequence(['gameStart', 'gameMusic']);
