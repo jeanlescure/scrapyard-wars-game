@@ -27,6 +27,20 @@ export default class ComputerPart extends Playable {
 
     this.scale.x = 0.375;
     this.scale.y = this.scale.x;
+
+    this.inputEnabled = true;
+    this.input.enableDrag();
+    this.events.onDragStart.add(() => {
+      this.tint = 0xff5500;
+      this.scale.x = 0.5;
+      this.scale.y = this.scale.x;
+      this.body.velocity.x = 0;
+    }, this);
+    this.events.onDragStop.add(() => {
+      this.tint = 0xffffff;
+      this.falling = true;
+      this.input.draggable = false;
+    }, this);
   }
 
   /**
@@ -34,7 +48,7 @@ export default class ComputerPart extends Playable {
    */
   updateCallback() {
     if (this.falling) {
-      this.scale.x = 0.2;
+      this.scale.x = 0.3;
       this.scale.y = this.scale.x;
       this.body.velocity.y = 200;
     } else {
