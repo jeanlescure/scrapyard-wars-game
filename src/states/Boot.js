@@ -16,11 +16,17 @@ export default class Boot extends Phaser.State {
     // Scale the game to fill the entire page.
     this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 
-    // Don't pause the game on blur.
-    this.game.stage.disableVisibilityChange = true;
+    // Ensure proper scaling all throughout
+    Phaser.Canvas.setImageRenderingCrisp(this.game.canvas);
     this.game.stage.smoothed = false;
     this.game.renderer.renderSession.roundPixels = false;
-    Phaser.Canvas.setImageRenderingCrisp(this.game.canvas);
+    this.game.scale.onSizeChange.add(() => {
+      this.game.canvas.style.marginTop = `-${Math.ceil(this.game.canvas.offsetHeight / 2)}px`;
+      this.game.canvas.style.marginLeft = `-${Math.ceil(this.game.canvas.offsetWidth / 2)}px`;
+    });
+
+    // Don't pause the game on blur.
+    this.game.stage.disableVisibilityChange = true;
 
     // Disable clearing the canvas on each tick (usually not needed).
     this.game.clearBeforeRender = false;
