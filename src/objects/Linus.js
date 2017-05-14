@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import Playable from './Playable';
 import {LINUS_ANIMATIONS} from '../Constants';
+
 /**
  * Setup and control player one (8-bit Linus Sebastian) sprite.
  */

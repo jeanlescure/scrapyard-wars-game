@@ -2,6 +2,7 @@ import BaseState from './BaseState';
 import GameBg from '../objects/GameBg';
 import ConveyorBelt from '../objects/ConveyorBelt';
 import Linus from '../objects/Linus';
+import ComputerPart from '../objects/ComputerPart';
 import {WIDTH, HEIGHT} from '../Constants';
 
 /**
@@ -37,8 +38,15 @@ export default class Main extends BaseState {
       y: HEIGHT,
     });
 
+    this.computerPart = new ComputerPart({
+      game: this.game,
+      x: WIDTH,
+      y: 25,
+    });
+
     this.addUpdateable(this.conveyorBelt);
     this.addUpdateable(this.playerOne);
+    this.addUpdateable(this.computerPart);
 
     this.game.world.store.howlManager.playSequence(['gameStart', 'gameMusic']);
   }
