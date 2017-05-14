@@ -21,6 +21,7 @@
     "build:webpack": "rimraf dist && cross-env NODE_ENV=production webpack --config build/webpack.config.js --progress --hide-modules"
   },
   "dependencies": {
+    "copy-to-clipboard": "^3.0.6",
     "howler": "2.0.3",
     "lodash": "^4.17.4",
     "lodash.throttle": "^4.1.1",

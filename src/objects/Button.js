@@ -17,9 +17,11 @@ export default class Button extends Phaser.Group {
   constructor({game, parent, name, textString, inputDownCallback, inputUpCallback}) {
     super(game, parent, name);
 
+    this.text = null;
+
     this.inputEnableChildren = true;
     this.onChildInputDown.add(inputDownCallback, this);
-    this.onChildInputDown.add(inputUpCallback, this);
+    this.onChildInputUp.add(inputUpCallback, this);
 
     const buttonBg = new Phaser.Image(this.game, 0, 0, 'button', 0);
     this.add(buttonBg);
@@ -33,21 +35,39 @@ export default class Button extends Phaser.Group {
 
   /**
    * Add the main text to the group.
+   * @param {Number} num The tint color number (e.g. 0xffffff).
+   */
+  tint(num) {
+    this.forEach((c) => {
+      c.tint = num;
+    }, this);
+  }
+
+  /**
+   * Change the text.
+   * @param {String} textString The text to display on the button.
+   */
+  changeText(textString) {
+    this.text.text = textString;
+  }
+
+  /**
+   * Add the text to the group.
    * @param {String} textString The text to display on the button.
    */
   addText(textString) {
     const textArgs = [
       this.game,
-      0,
-      0,
+      this.centerX,
+      this.centerY,
       textString,
       {
-        font: 'normal 30px Press Start 2P',
+        font: 'normal 22px Press Start 2P',
         fill: '#ffffff',
       },
     ];
-    const text = new Phaser.Text(...textArgs);
-    text.alignIn(this, Phaser.CENTER);
-    this.add(text);
+    this.text = new Phaser.Text(...textArgs);
+    this.text.anchor.setTo(0.5, 0.5);
+    this.add(this.text);
   }
 }

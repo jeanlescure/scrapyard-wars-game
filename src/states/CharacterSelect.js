@@ -1,3 +1,4 @@
+import copy from 'copy-to-clipboard';
 import ShortUniqueId from 'short-unique-id';
 
 import BaseState from './BaseState';
@@ -77,17 +78,22 @@ export default class CharacterSelect extends BaseState {
             inputDownCallback: function inputDownCallback() {
               // ...
             },
-            inputUpCallback: function inputDownCallback() {
+            inputUpCallback: function inputUpCallback() {
               // ...
             },
           },
           {
             textString: 'COPY',
             inputDownCallback: function inputDownCallback() {
-              // ...
+              this.tint(0xffdd00);
             },
-            inputUpCallback: function inputDownCallback() {
-              // ...
+            inputUpCallback: function inputUpCallback() {
+              copy(this.game.world.store.match.uid);
+              this.changeText('COPIED');
+              setTimeout(() => {
+                this.tint(0xffffff);
+                this.changeText('COPY');
+              }, 3000);
             },
           },
         ],
