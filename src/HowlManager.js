@@ -76,4 +76,48 @@ export default class HowlManager {
   playHowl(name) {
     this.howlCollection[name].play();
   }
+
+  /**
+   * Play a `Howl` from the `howlCollection`.
+   * @param {Array} names Names to be used to call the howls sequentially.
+   */
+  playSequence(names) {
+    const self = this;
+
+    const playAndShift = function playAndShift() {
+      const howl = self.howlCollection[names[0]];
+      howl.play();
+
+      names.shift();
+
+      howl.once('end', () => {
+        if (names.length > 0) {
+          playAndShift();
+        }
+      });
+    };
+
+    playAndShift();
+  }
+
+  /**
+   * Stop a `Howl` from the `howlCollection`.
+   * @param {String} name Name to be used to call the howl.
+   */
+  stopHowl(name) {
+    this.howlCollection[name].stop();
+  }
+
+  /**
+   * Stop a `Howl` from the `howlCollection` with a fade.
+   * @param {String} name Name to be used to call the howl.
+   */
+  fadeStopHowl(name) {
+    const howl = this.howlCollection[name];
+    howl.fade(1.0, 0.0, 1500);
+    howl.once('fade', () => {
+      howl.stop();
+      howl.volume(1.0);
+    });
+  }
 }
