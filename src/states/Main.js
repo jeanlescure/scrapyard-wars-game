@@ -40,9 +40,10 @@ export default class Main extends BaseState {
 
     this.computerPart = new ComputerPart({
       game: this.game,
-      x: WIDTH,
+      x: WIDTH + 64,
       y: 25,
     });
+    this.computerPart.body.velocity.x = -30;
 
     this.addUpdateable(this.conveyorBelt);
     this.addUpdateable(this.playerOne);
