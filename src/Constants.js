@@ -180,3 +180,20 @@ export const PART_TYPES = [
     maxPriceMultiplier: 0.8,
   },
 ];
+
+export const DIALOG_DEFAULT_OPTIONS = {
+  mainTextString: 'Default Main Text',
+  secondaryTextString: 'Default Secondary Text',
+  hasInput: false,
+  buttonStates: [
+    {
+      textString: 'OK',
+      inputDownCallback: function inputDownCallback() {
+        // ...
+      },
+      inputUpCallback: function inputDownCallback() {
+        // ...
+      },
+    },
+  ],
+};

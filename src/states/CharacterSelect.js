@@ -3,6 +3,7 @@ import ShortUniqueId from 'short-unique-id';
 import BaseState from './BaseState';
 import IntroBg from '../objects/IntroBg';
 import CharacterCard from '../objects/CharacterCard';
+import Dialog from '../objects/Dialog';
 
 /**
  * Setup and display the character selection state.
@@ -44,7 +45,9 @@ export default class CharacterSelect extends BaseState {
         this.game.world.store.match.uid = uid.randomUUID(6);
 
         this.game.world.store.howlManager.playHowl('selected');
-        this.HideCharacterCards();
+        this.hideCharacterCards();
+        this.createPlayerOneDialog();
+        this.playerOneDialog.visible = true;
       },
     });
 
@@ -58,9 +61,45 @@ export default class CharacterSelect extends BaseState {
   }
 
   /**
+   * Show player one's dialog.
+   */
+  createPlayerOneDialog() {
+    this.playerOneDialog = new Dialog({
+      game: this.game,
+      parent: this.game.world,
+      name: 'player-one-dialog',
+      options: {
+        mainTextString: this.game.world.store.match.uid,
+        secondaryTextString: `send this match id to a buddy${'\n'}(they gotta pick Luke)`,
+        buttonStates: [
+          {
+            textString: 'PLAY',
+            inputDownCallback: function inputDownCallback() {
+              // ...
+            },
+            inputUpCallback: function inputDownCallback() {
+              // ...
+            },
+          },
+          {
+            textString: 'COPY',
+            inputDownCallback: function inputDownCallback() {
+              // ...
+            },
+            inputUpCallback: function inputDownCallback() {
+              // ...
+            },
+          },
+        ],
+      },
+    });
+  }
+
+  /**
    * Hide character cards.
    */
-  HideCharacterCards() {
+  hideCharacterCards() {
+    this.chooseCharText.visible = false;
     this.playerOneCard.visible = false;
     this.playerTwoCard.visible = false;
   }

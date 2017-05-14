@@ -12,6 +12,8 @@ const AssetManifest = {
   ],
   images: [
     'game-bg.png',
+    'dialog-bg.png',
+    'button.png',
     'character-card-linus.png',
     'character-card-luke.png',
   ],
@@ -19,6 +21,7 @@ const AssetManifest = {
     google: {
       families: [
         'Press Start 2P',
+        'PT Mono',
       ],
     },
   },
