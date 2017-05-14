@@ -13,9 +13,6 @@ export default class BaseState extends Phaser.State {
     this.marginTopValue = '-';
     this.marginLeftValue = '-';
     this.updateables = [];
-
-    // Setup listener for window resize.
-    window.addEventListener('resize', throttle(this.resize.bind(this), 50), false);
   }
 
   /**
@@ -24,15 +21,6 @@ export default class BaseState extends Phaser.State {
    * method for each item in the `updateables` array.
    */
   static update() {
-    if (this.game.canvas.style.marginTop !== this.marginTopValue) {
-      window.dispatchEvent(new Event('resize'));
-
-      this.game.canvas.style.marginTop = this.marginTopValue;
-      this.game.canvas.style.marginLeft = this.marginLeftValue;
-
-      this.scale.setGameSize(WIDTH, HEIGHT);
-    }
-
     _.each(this.updateables, (u) => {
       u.updateCallback();
     });
@@ -45,13 +33,5 @@ export default class BaseState extends Phaser.State {
    */
   addUpdateable(gameObject) {
     this.updateables.push(gameObject);
-  }
-
-  /**
-   * Resize the game to fit the window.
-   */
-  resize() {
-    this.marginTopValue = `-${Math.ceil(this.game.canvas.offsetHeight / 2)}px`;
-    this.marginLeftValue = `-${Math.ceil(this.game.canvas.offsetWidth / 2)}px`;
   }
 }
