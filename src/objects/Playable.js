@@ -14,10 +14,6 @@ export default class Playable extends Phaser.Sprite {
   constructor({game, x, y, frame}) {
     super(game, x, y, 'playables', (frame || 0));
 
-    // Add the sprite to the game.
-    this.game.add.existing(this);
-    this.anchor.setTo(0.5);
-
     this.game.physics.arcade.enable(this);
   }
 }

@@ -23,7 +23,7 @@ export default class IntroBg extends Phaser.Sprite {
     this.height = HEIGHT;
 
     _.each(INTRO_BG_ANIMATIONS, (animation) => {
-      this.animations.add(animation.name, animation.frame, animation.speed);
+      this.animations.add(animation.name, animation.frames, animation.speed);
     });
   }
 
