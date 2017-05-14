@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import 'canvasinput/CanvasInput.min';
 import Button from './Button';
 import {WIDTH, HEIGHT, DIALOG_DEFAULT_OPTIONS} from '../Constants';
 
@@ -37,6 +38,8 @@ export default class Dialog extends Phaser.Group {
 
     if (!this.options.hasInput) {
       this.addSecondaryText();
+    } else {
+      this.createInput(this.centerX, this.centerY - 10);
     }
 
     _.each(this.options.buttonStates, (buttonState) => {
@@ -49,6 +52,42 @@ export default class Dialog extends Phaser.Group {
     this.game.add.existing(this);
 
     this.alignIn(this.game.world, Phaser.TOP_CENTER);
+  }
+
+  /**
+   * Change the text.
+   * @param {Number} x The x position.
+   * @param {Number} y The y position.
+   */
+  createInput(x, y) {
+    const bmd = this.game.add.bitmapData(250, 40);
+    this.input = new Phaser.Sprite(this.game, x, y, bmd);
+
+    const input = this.input;
+
+    input.anchor.setTo(0.5, 0.5);
+    this.add(input);
+
+    /* eslint-disable no-undef */
+    input.canvasInput = new CanvasInput({
+      canvas: bmd.canvas,
+      fontSize: 18,
+      fontFamily: 'PT Mono',
+      fontColor: '#212121',
+      fontWeight: 'bold',
+      width: 230,
+      padding: 8,
+      borderWidth: 1,
+      borderColor: '#000',
+      borderRadius: 3,
+      innerShadow: '0px 0px 5px rgba(0, 0, 0, 0.5)',
+    });
+    /* eslint-enable no-undef */
+    input.inputEnabled = true;
+    input.input.useHandCursor = true;
+    input.events.onInputUp.add(() => {
+      input.canvasInput.focus();
+    });
   }
 
   /**

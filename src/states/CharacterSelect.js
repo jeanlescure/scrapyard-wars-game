@@ -55,14 +55,19 @@ export default class CharacterSelect extends BaseState {
     this.playerTwoCard = new CharacterCard({
       game: this.game,
       charIdx: 1,
-      clickCallback: function clickCallback() {
-        // ...
+      clickCallback: () => {
+        this.game.world.store.player.character = 1;
+
+        this.game.world.store.howlManager.playHowl('selected');
+        this.hideCharacterCards();
+        this.createPlayerTwoDialog();
+        this.playerTwoDialog.visible = true;
       },
     });
   }
 
   /**
-   * Show player one's dialog.
+   * Create player one's dialog.
    */
   createPlayerOneDialog() {
     this.playerOneDialog = new Dialog({
@@ -96,6 +101,36 @@ export default class CharacterSelect extends BaseState {
                 this.tint(0xffffff);
                 this.changeText('COPY');
               }, 3000);
+            },
+          },
+        ],
+      },
+    });
+  }
+
+  /**
+   * Create player two's dialog.
+   */
+  createPlayerTwoDialog() {
+    const self = this;
+    this.playerTwoDialog = new Dialog({
+      game: this.game,
+      parent: this.game.world,
+      name: 'player-two-dialog',
+      options: {
+        mainTextString: 'Enter match id:',
+        hasInput: true,
+        buttonStates: [
+          {
+            textString: 'PLAY',
+            inputDownCallback: function inputDownCallback() {
+              this.tint(0xffdd00);
+            },
+            inputUpCallback: function inputUpCallback() {
+              this.tint(0xffffff);
+              this.game.world.store.match.uid = self.playerTwoDialog.input.canvasInput.value();
+              this.game.world.store.howlManager.playHowl('selected');
+              this.game.state.start('Tutorial');
             },
           },
         ],
