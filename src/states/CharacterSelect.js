@@ -76,10 +76,12 @@ export default class CharacterSelect extends BaseState {
           {
             textString: 'PLAY',
             inputDownCallback: function inputDownCallback() {
-              // ...
+              this.tint(0xffdd00);
             },
             inputUpCallback: function inputUpCallback() {
-              // ...
+              this.tint(0xffffff);
+              this.game.world.store.howlManager.playHowl('selected');
+              this.game.state.start('Tutorial');
             },
           },
           {
