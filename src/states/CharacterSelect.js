@@ -35,11 +35,18 @@ export default class CharacterSelect extends BaseState {
     this.playerOneCard = new CharacterCard({
       game: this.game,
       charIdx: 0,
+      clickCallback: function clickCallback() {
+        this.game.world.store.player.character = 0;
+        this.game.world.store.howlManager.playHowl('selected');
+      },
     });
 
     this.playerTwoCard = new CharacterCard({
       game: this.game,
       charIdx: 1,
+      clickCallback: function clickCallback() {
+        // ...
+      },
     });
   }
 
@@ -48,9 +55,5 @@ export default class CharacterSelect extends BaseState {
    */
   update() {
     BaseState.update.call(this);
-
-    if (this.game.input.activePointer.isDown) {
-      this.game.state.start('Tutorial');
-    }
   }
 }
