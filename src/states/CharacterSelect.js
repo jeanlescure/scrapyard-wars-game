@@ -35,9 +35,10 @@ export default class CharacterSelect extends BaseState {
     this.playerOneCard = new CharacterCard({
       game: this.game,
       charIdx: 0,
-      clickCallback: function clickCallback() {
+      clickCallback: () => {
         this.game.world.store.player.character = 0;
         this.game.world.store.howlManager.playHowl('selected');
+        this.HideCharacterCards();
       },
     });
 
@@ -48,6 +49,14 @@ export default class CharacterSelect extends BaseState {
         // ...
       },
     });
+  }
+
+  /**
+   * Hide character cards.
+   */
+  HideCharacterCards() {
+    this.playerOneCard.visible = false;
+    this.playerTwoCard.visible = false;
   }
 
   /**
