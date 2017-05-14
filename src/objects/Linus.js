@@ -29,6 +29,24 @@ export default class Linus extends Playable {
    * To be called by the parent state's `update()` method.
    */
   updateCallback() {
-    this.animations.play('wait');
+    if (this.game.input.activePointer.isDown) {
+      this.destinationX = Math.floor(this.game.input.x / 10) * 10;
+    }
+
+    if (Math.floor(this.x / 10) === Math.floor(this.destinationX / 10)) {
+      this.body.velocity.x = 0;
+    } else if (this.x > this.destinationX) {
+      this.body.velocity.x = -300;
+      this.scale.x = -1;
+    } else if (this.x < this.destinationX) {
+      this.body.velocity.x = 300;
+      this.scale.x = 1;
+    }
+
+    if (this.body.velocity.x !== 0) {
+      this.animations.play('walk');
+    } else {
+      this.animations.play('wait');
+    }
   }
 }

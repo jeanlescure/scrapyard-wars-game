@@ -14,6 +14,8 @@ export default class Main extends BaseState {
     // Enable arcade physics.
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
+    this.game.input.activePointer.capture = true;
+
     this.gameBg = new GameBg({
       game: this.game,
       x: 0,

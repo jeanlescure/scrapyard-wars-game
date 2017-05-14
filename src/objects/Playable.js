@@ -14,6 +14,10 @@ export default class Playable extends Phaser.Sprite {
   constructor({game, x, y, frame}) {
     super(game, x, y, 'playables', (frame || 0));
 
+    this.destinationX = x;
+    this.destinationY = y;
+
     this.game.physics.arcade.enable(this);
+    this.body.immovable = true;
   }
 }
