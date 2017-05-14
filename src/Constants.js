@@ -15,6 +15,13 @@ export const CHARACTERS = [
     x: 76,
     y: 52,
     anchor: [0, 0],
+    /* eslint-disable max-len */
+    tutorialLines: [
+      'Linus is frantically trying to catch all the computer parts Luke is throwing at him.',
+      'Help him by tapping on where he should run to.',
+      'Be quick and communicate, if you fail to catch a part, YOU STILL HAVE TO PAY FOR IT!',
+    ],
+    /* eslint-enable max-len */
   },
   {
     name: 'Luke',
@@ -22,6 +29,9 @@ export const CHARACTERS = [
     x: 615,
     y: 52,
     anchor: [1, 0],
+    /* eslint-disable max-len */
+    tutorialLines: [],
+    /* eslint-enable max-len */
   },
 ];
 
