@@ -33,7 +33,7 @@ export const CHARACTERS = [
     tutorialLines: [
       'Luke has been tasked with finding the best, yet cheapest, computer parts.',
       'Help him by dragging the parts off of the conveyor belt.',
-      'Be careful and communicate, if Linus fails to catch a part, YOU STILL HAVE TO PAY FOR IT!'
+      'Be careful and communicate, if Linus fails to catch a part, YOU STILL HAVE TO PAY FOR IT!',
     ],
     /* eslint-enable max-len */
   },

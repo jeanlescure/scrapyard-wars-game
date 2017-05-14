@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import BaseState from './BaseState';
-import {CHARACTERS} from '../Constants';
+import Button from '../objects/Button';
+import {WIDTH, HEIGHT, CHARACTERS} from '../Constants';
 
 /**
  * Setup and display the tutorial game state.
@@ -31,6 +32,19 @@ export default class Tutorial extends BaseState {
     const mainText = new Phaser.Text(...mainTextArgs);
     mainText.alignIn(this.game.world, Phaser.TOP_CENTER, 0, -60);
     this.game.add.existing(mainText);
+
+    this.readyButton = new Button({
+      game: this.game,
+      parent: this.game.world,
+      name: 'ready-button',
+      textString: 'READY',
+      inputDownCallback: () => {},
+      inputUpCallback: () => {},
+    });
+
+    this.game.add.existing(this.readyButton);
+    this.readyButton.x = WIDTH - this.readyButton.width - 40;
+    this.readyButton.y = HEIGHT - this.readyButton.height - 40;
   }
 
   /**
