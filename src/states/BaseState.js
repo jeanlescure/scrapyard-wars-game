@@ -1,6 +1,4 @@
 import _ from 'lodash';
-import throttle from 'lodash.throttle';
-import {WIDTH, HEIGHT} from '../Constants';
 
 /**
  * Setup and display the main game state.

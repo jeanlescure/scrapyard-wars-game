@@ -21,11 +21,14 @@
     "build:webpack": "rimraf dist && cross-env NODE_ENV=production webpack --config build/webpack.config.js --progress --hide-modules"
   },
   "dependencies": {
+    "canvasinput": "^1.2.6",
+    "copy-to-clipboard": "^3.0.6",
     "howler": "2.0.3",
     "lodash": "^4.17.4",
     "lodash.throttle": "^4.1.1",
     "phaser-ce": "2.7.7",
     "phaser-webpack-loader": "1.0.0",
+    "short-unique-id": "^1.1.0",
     "stats.js": "0.17.0",
     "winston": "2.3.1"
   },

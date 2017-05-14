@@ -7,6 +7,7 @@ export default class Boot extends Phaser.State {
    */
   preload() {
     this.game.this = true;
+    this.game.load.script('gray', 'https://cdn.rawgit.com/photonstorm/phaser/master/v2/filters/Gray.js');
   }
 
   /**

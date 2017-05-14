@@ -1,4 +1,6 @@
+import _ from 'lodash';
 import Stats from 'stats.js';
+import Store from './Store';
 import Boot from './states/Boot';
 import Preload from './states/Preload';
 import TitleScreen from './states/TitleScreen';
@@ -70,6 +72,11 @@ class Game extends Phaser.Game {
       stats.begin();
       updateLoop.apply(this, args);
       stats.end();
+
+      // Initiate the global data management object.
+      if (_.isEmpty(this.world.store)) {
+        this.world.store = new Store();
+      }
     };
   }
 }

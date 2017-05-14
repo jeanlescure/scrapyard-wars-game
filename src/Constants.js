@@ -12,14 +12,16 @@ export const CHARACTERS = [
   {
     name: 'Linus',
     key: 'character-card-linus',
-    x: 0,
-    y: 0,
+    x: 76,
+    y: 52,
+    anchor: [0, 0],
   },
   {
     name: 'Luke',
     key: 'character-card-luke',
-    x: 0,
-    y: 0,
+    x: 615,
+    y: 52,
+    anchor: [1, 0],
   },
 ];
 
@@ -178,3 +180,20 @@ export const PART_TYPES = [
     maxPriceMultiplier: 0.8,
   },
 ];
+
+export const DIALOG_DEFAULT_OPTIONS = {
+  mainTextString: 'Default Main Text',
+  secondaryTextString: 'Default Secondary Text',
+  hasInput: false,
+  buttonStates: [
+    {
+      textString: 'OK',
+      inputDownCallback: function inputDownCallback() {
+        // ...
+      },
+      inputUpCallback: function inputDownCallback() {
+        // ...
+      },
+    },
+  ],
+};
