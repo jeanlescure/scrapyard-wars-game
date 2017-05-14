@@ -38,8 +38,16 @@ export default class Tutorial extends BaseState {
       parent: this.game.world,
       name: 'ready-button',
       textString: 'READY',
-      inputDownCallback: () => {},
-      inputUpCallback: () => {},
+      inputDownCallback: () => {
+        this.readyButton.tint(0xffdd00);
+      },
+      inputUpCallback: () => {
+        this.readyButton.tint(0xff55aa);
+        this.readyButton.changeText('WAITING');
+        setTimeout(() => {
+          this.game.state.start('Main');
+        }, 3000);
+      },
     });
 
     this.game.add.existing(this.readyButton);
