@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "canvasinput": "^1.2.6",
+    "change-case": "^3.0.1",
     "copy-to-clipboard": "^3.0.6",
     "howler": "2.0.3",
     "lodash": "^4.17.4",
