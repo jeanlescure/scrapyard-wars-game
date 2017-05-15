@@ -22,9 +22,22 @@ export default class ComputerPart extends Playable {
     this.falling = false;
     this.caught = false;
 
+    const pmArgs = [
+      this.partType.minPriceMultiplier,
+      this.partType.maxPriceMultiplier,
+    ];
+    this.priceMultiplier = _.random(...pmArgs);
+
+    this.spec = _.sample(this.partType.specOptions) || 1;
+
+    this.price = Math.ceil(this.priceMultiplier * this.spec);
+
     // Add the sprite to the game.
     this.game.add.existing(this);
     this.anchor.setTo(0.5, 0.5);
+
+    this.addPriceText();
+    this.addSpecText();
 
     this.scale.x = 0.375;
     this.scale.y = this.scale.x;
@@ -45,6 +58,59 @@ export default class ComputerPart extends Playable {
   }
 
   /**
+   * Adds the price text.
+   */
+  addPriceText() {
+    const priceTextArgs = [
+      this.game,
+      0,
+      0,
+      `$${this.price}`,
+      {
+        font: 'normal 13px PT Mono',
+        fill: '#ffffff',
+        stroke: 0x000000,
+        strokeThickness: 4,
+      },
+    ];
+    this.priceText = new Phaser.Text(...priceTextArgs);
+    // this.priceText.alignTo(this, Phaser.BOTTOM_LEFT);
+    this.game.add.existing(this.priceText);
+  }
+
+  /**
+   * Adds the spec text.
+   */
+  addSpecText() {
+    let specString = `${this.partType.specPrefix}${this.spec}${this.partType.specSuffix}`;
+    if (specString === '1') {
+      specString = '';
+    }
+    const specTextArgs = [
+      this.game,
+      0,
+      0,
+      specString,
+      {
+        font: 'normal 11px PT Mono',
+        fill: '#ffffff',
+        stroke: 0x000000,
+        strokeThickness: 3,
+      },
+    ];
+    this.specText = new Phaser.Text(...specTextArgs);
+    this.game.add.existing(this.specText);
+  }
+
+  /**
+   * On destroy.
+   */
+  destroy() {
+    this.priceText.destroy();
+    this.specText.destroy();
+  }
+
+  /**
    * To be called by the parent state's `update()` method.
    */
   updateCallback() {
@@ -55,5 +121,8 @@ export default class ComputerPart extends Playable {
     } else {
       this.body.velocity.y = 0;
     }
+
+    this.priceText.alignTo(this, Phaser.LEFT_CENTER, -20, 0);
+    this.specText.alignTo(this, Phaser.BOTTOM_RIGHT, 10, -12);
   }
 }

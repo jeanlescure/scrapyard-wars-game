@@ -86,7 +86,7 @@ export default class CharacterSelect extends BaseState {
             inputUpCallback: function inputUpCallback() {
               this.tint(0xffffff);
               this.game.world.store.howlManager.playHowl('selected');
-              this.game.state.start('Main');
+              this.game.state.start('Tutorial');
             },
           },
           {
@@ -130,7 +130,7 @@ export default class CharacterSelect extends BaseState {
               this.tint(0xffffff);
               this.game.world.store.match.uid = self.playerTwoDialog.input.canvasInput.value();
               this.game.world.store.howlManager.playHowl('selected');
-              this.game.state.start('Main');
+              this.game.state.start('Tutorial');
             },
           },
         ],
