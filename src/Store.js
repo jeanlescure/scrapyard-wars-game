@@ -29,6 +29,8 @@ export default class Store {
     };
 
     // Simple object to manage sounds. E.g. `this.howls.introMusic.play`
-    this.howlManager = new HowlManager();
+    if (!this.howlManager) {
+      this.howlManager = new HowlManager();
+    }
   }
 }
