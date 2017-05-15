@@ -54,6 +54,7 @@ export default class ComputerPart extends Playable {
       this.scale.x = 0.5;
       this.scale.y = this.scale.x;
       this.body.velocity.x = 0;
+      // Add this part's price to the score as soon as touched.
       this.game.world.store.match.score += this.price;
     }, this);
     this.events.onDragStop.add(() => {
@@ -89,9 +90,10 @@ export default class ComputerPart extends Playable {
    */
   addSpecText() {
     let specString = `${this.partType.specPrefix}${this.spec}${this.partType.specSuffix}`;
-    if (specString === '1') {
+    if (!this.partType.hasSpec) {
       specString = '';
     }
+    
     const specTextArgs = [
       this.game,
       0,
