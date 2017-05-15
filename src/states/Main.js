@@ -84,7 +84,7 @@ export default class Main extends BaseState {
             computerPart.falling = false;
 
             // Store computer part data for score calculation.
-            this.world.store.match.parts.push(computerPart.partType);
+            this.game.world.store.match.parts.push(computerPart.meta);
 
             // I should not keep being checked or updated.
             _.pull(this.computerParts, computerPart);

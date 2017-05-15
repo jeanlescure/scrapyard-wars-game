@@ -32,6 +32,11 @@ export default class ComputerPart extends Playable {
 
     this.price = Math.ceil(this.priceMultiplier * this.spec);
 
+    this.meta = {
+      name: this.partType.name,
+      price: this.price,
+    };
+
     // Add the sprite to the game.
     this.game.add.existing(this);
     this.anchor.setTo(0.5, 0.5);
@@ -49,6 +54,7 @@ export default class ComputerPart extends Playable {
       this.scale.x = 0.5;
       this.scale.y = this.scale.x;
       this.body.velocity.x = 0;
+      this.game.world.store.match.score += this.price;
     }, this);
     this.events.onDragStop.add(() => {
       this.tint = 0xffffff;
