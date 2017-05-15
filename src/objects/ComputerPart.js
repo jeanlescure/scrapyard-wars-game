@@ -81,7 +81,6 @@ export default class ComputerPart extends Playable {
       },
     ];
     this.priceText = new Phaser.Text(...priceTextArgs);
-    // this.priceText.alignTo(this, Phaser.BOTTOM_LEFT);
     this.game.add.existing(this.priceText);
   }
 
@@ -93,7 +92,7 @@ export default class ComputerPart extends Playable {
     if (!this.partType.hasSpec) {
       specString = '';
     }
-    
+
     const specTextArgs = [
       this.game,
       0,

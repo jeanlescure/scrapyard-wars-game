@@ -1,10 +1,11 @@
 import _ from 'lodash';
 import BaseState from './BaseState';
 import GameBg from '../objects/GameBg';
+import ScoreTracker from '../objects/ScoreTracker';
 import ConveyorBelt from '../objects/ConveyorBelt';
 import Linus from '../objects/Linus';
 import ComputerPart from '../objects/ComputerPart';
-import {WIDTH, HEIGHT} from '../Constants';
+import {WIDTH, HEIGHT, PART_TYPES} from '../Constants';
 
 /**
  * Setup and display the main game state.
@@ -14,6 +15,9 @@ export default class Main extends BaseState {
    * Setup all objects, etc needed for the main game state.
    */
   create() {
+    // Generate this match's goal.
+    this.generateGoal();
+
     // Enable arcade physics.
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -33,6 +37,12 @@ export default class Main extends BaseState {
       height: 128,
     });
 
+    this.scoreTracker = new ScoreTracker({
+      game: this.game,
+      parent: this.game.world,
+      name: 'score-tracker-group',
+    });
+
     this.playerOne = new Linus({
       game: this.game,
       x: this.game.world.centerX,
@@ -46,6 +56,42 @@ export default class Main extends BaseState {
     this.addUpdateable(this.playerOne);
 
     this.game.world.store.howlManager.playSequence(['gameStart', 'gameMusic']);
+  }
+
+  /**
+   * Generate this match's goal. Done dynamically as to not
+   * be affected by future changes in price multipliers
+   * and specs of PART_TYPES array.
+   *
+   * NOTE: No Google used for this one. I know my math well.
+   */
+  generateGoal() {
+    // Map cheapest price for all parts.
+    const minPMCollection = _.map(PART_TYPES, (pt) => {
+      const minSpec = (pt.hasSpec) ? _(pt.specOptions).sortBy().first() : 1;
+      return minSpec * pt.minPriceMultiplier;
+    });
+
+    // Map the most expensive price for all parts.
+    const maxPMCollection = _.map(PART_TYPES, (pt) => {
+      const maxSpec = (pt.hasSpec) ? _(pt.specOptions).sortBy().last() : 1;
+      return maxSpec * pt.maxPriceMultiplier;
+    });
+
+    // Get the cheapest and most expensive parts, then average them.
+    const minPrice = _(minPMCollection).sortBy().first();
+    const maxPrice = _(maxPMCollection).sortBy().last();
+    const avgPrice = (minPrice + maxPrice) / 2;
+
+    // Our ideal range should start from the average part price
+    // up to the max, and also take into account a quotient based
+    // on the number of parts needed to be fetched during a match.
+    const halfNumOfParts = PART_TYPES.length / 2;
+    const goalRange = [
+      avgPrice * halfNumOfParts,
+      maxPrice * halfNumOfParts,
+    ];
+    this.game.world.store.match.goal = Math.ceil(_.random(...goalRange));
   }
 
   /**
