@@ -32,4 +32,13 @@ export default class BaseState extends Phaser.State {
   addUpdateable(gameObject) {
     this.updateables.push(gameObject);
   }
+
+  /**
+   * Remove a game object with an `updateCallback()` method.
+   * @param {Phaser.GameObjectFactory} gameObject Instance of a game
+   * object containing an `updateCallback()` method.
+   */
+  removeUpdateable(gameObject) {
+    _.pull(this.updateables, gameObject);
+  }
 }
