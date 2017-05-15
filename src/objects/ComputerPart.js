@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import Playable from './Playable';
-import {PART_TYPES} from '../Constants';
 
 /**
  * Setup and control a computer part sprite.
@@ -14,8 +13,7 @@ export default class ComputerPart extends Playable {
    *    y: integer
    * }} dobj Destructured arguments object.
    */
-  constructor({game, x, y}) {
-    const partType = _.sample(PART_TYPES);
+  constructor({game, x, y, partType}) {
     super({game, x, y, frame: partType.frame});
 
     this.partType = partType;

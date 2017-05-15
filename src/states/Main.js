@@ -6,7 +6,7 @@ import PartsTracker from '../objects/PartsTracker';
 import ConveyorBelt from '../objects/ConveyorBelt';
 import Linus from '../objects/Linus';
 import ComputerPart from '../objects/ComputerPart';
-import {WIDTH, HEIGHT, PART_TYPES} from '../Constants';
+import {WIDTH, HEIGHT, PART_TYPES, PARTS_SPEED} from '../Constants';
 
 /**
  * Setup and display the main game state.
@@ -57,6 +57,7 @@ export default class Main extends BaseState {
       y: HEIGHT,
     });
 
+    this.computerPartsBuffer = [];
     this.computerParts = [];
     this.addComputerPart();
 
@@ -105,16 +106,27 @@ export default class Main extends BaseState {
   }
 
   /**
+   * This generates a randomized copy of PART_TYPES which can be emptied.
+   */
+  genComputerPartBuffer() {
+    this.computerPartsBuffer = _.shuffle(_.flatten([PART_TYPES, PART_TYPES, PART_TYPES]));
+  }
+
+  /**
    * Add a new computer part to the stage and set timeout to repeat.
    */
   addComputerPart() {
+    if (_.isEmpty(this.computerPartsBuffer)) {
+      this.genComputerPartBuffer();
+    }
     const computerPart = new ComputerPart({
       game: this.game,
       x: WIDTH + 64,
       y: 25,
+      partType: this.computerPartsBuffer.pop(),
     });
 
-    computerPart.body.velocity.x = -150;
+    computerPart.body.velocity.x = PARTS_SPEED;
 
     this.addCollisionCheck(computerPart);
     this.computerParts.push(computerPart);
@@ -122,7 +134,7 @@ export default class Main extends BaseState {
 
     this.computerPartTimeout = setTimeout(() => {
       this.addComputerPart();
-    }, 1000);
+    }, 2000);
   }
 
   /**
