@@ -23,14 +23,23 @@ export default class Button extends Phaser.Group {
     this.onChildInputDown.add(inputDownCallback, this);
     this.onChildInputUp.add(inputUpCallback, this);
 
-    const buttonBg = new Phaser.Image(this.game, 0, 0, 'button', 0);
-    this.add(buttonBg);
+    this.buttonBg = new Phaser.Image(this.game, 0, 0, 'button', 0);
+    this.add(this.buttonBg);
 
     this.addText(textString);
     this.scale.x = 0.75;
     this.scale.y = this.scale.x;
 
     this.parent.add(this);
+  }
+
+  /**
+   * Disable input.
+   */
+  disableInput() {
+    this.inputEnableChildren = false;
+    this.text.inputEnabled = false;
+    this.buttonBg.inputEnabled = false;
   }
 
   /**
