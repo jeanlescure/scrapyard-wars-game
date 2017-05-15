@@ -77,7 +77,7 @@ export const CONVEYOR_BELT_ANIMATIONS = [
 // Part types
 export const PART_TYPES = [
   {
-    type: 'case',
+    name: 'case',
     frame: 4,
     hasSpec: false,
     specPrefix: '',
@@ -87,7 +87,7 @@ export const PART_TYPES = [
     maxPriceMultiplier: 1000,
   },
   {
-    type: 'cpu',
+    name: 'cpu',
     frame: 5,
     hasSpec: true,
     specPrefix: '',
@@ -105,7 +105,7 @@ export const PART_TYPES = [
     maxPriceMultiplier: 210,
   },
   {
-    type: 'graphics_card',
+    name: 'graphics_card',
     frame: 6,
     hasSpec: true,
     specPrefix: 'GTX',
@@ -124,7 +124,7 @@ export const PART_TYPES = [
     maxPriceMultiplier: 0.65,
   },
   {
-    type: 'cooler',
+    name: 'cooler',
     frame: 7,
     hasSpec: false,
     specPrefix: '',
@@ -134,7 +134,7 @@ export const PART_TYPES = [
     maxPriceMultiplier: 250,
   },
   {
-    type: 'motherboard',
+    name: 'motherboard',
     frame: 8,
     hasSpec: false,
     specPrefix: '',
@@ -144,7 +144,7 @@ export const PART_TYPES = [
     maxPriceMultiplier: 800,
   },
   {
-    type: 'powerSupply',
+    name: 'powerSupply',
     frame: 9,
     hasSpec: true,
     specPrefix: '',
@@ -159,7 +159,7 @@ export const PART_TYPES = [
     maxPriceMultiplier: 1.25,
   },
   {
-    type: 'ram',
+    name: 'ram',
     frame: 10,
     hasSpec: true,
     specPrefix: '',
@@ -177,7 +177,7 @@ export const PART_TYPES = [
     maxPriceMultiplier: 12.5,
   },
   {
-    type: 'ssd',
+    name: 'ssd',
     frame: 11,
     hasSpec: true,
     specPrefix: '',

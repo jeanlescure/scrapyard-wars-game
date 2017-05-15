@@ -11,6 +11,7 @@ body, html {
   image-rendering: -webkit-optimize-contrast;
   image-rendering: optimize-contrast;
   -ms-interpolation-mode: nearest-neighbor;
+  overflow: hidden;
 }
 
 canvas {
@@ -18,4 +19,5 @@ canvas {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  border: 3px #000000 solid;
 }
