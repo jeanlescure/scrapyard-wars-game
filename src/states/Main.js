@@ -2,6 +2,7 @@ import _ from 'lodash';
 import BaseState from './BaseState';
 import GameBg from '../objects/GameBg';
 import ScoreTracker from '../objects/ScoreTracker';
+import PartsTracker from '../objects/PartsTracker';
 import ConveyorBelt from '../objects/ConveyorBelt';
 import Linus from '../objects/Linus';
 import ComputerPart from '../objects/ComputerPart';
@@ -35,6 +36,12 @@ export default class Main extends BaseState {
       name: 'score-tracker-group',
     });
 
+    this.partsTracker = new PartsTracker({
+      game: this.game,
+      parent: this.game.world,
+      name: 'parts-tracker-group',
+    });
+
     this.conveyorBelt = new ConveyorBelt({
       game: this.game,
       x: 0,
@@ -53,6 +60,7 @@ export default class Main extends BaseState {
     this.addComputerPart();
 
     this.addUpdateable(this.scoreTracker);
+    this.addUpdateable(this.partsTracker);
     this.addUpdateable(this.conveyorBelt);
     this.addUpdateable(this.playerOne);
 
