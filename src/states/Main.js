@@ -69,10 +69,6 @@ export default class Main extends BaseState {
   }
 
   /**
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> dev
    * Generate this match's goal. Done dynamically as to not
    * be affected by future changes in price multipliers
    * and specs of PART_TYPES array.
@@ -109,11 +105,6 @@ export default class Main extends BaseState {
   }
 
   /**
-<<<<<<< HEAD
-=======
->>>>>>> master
-=======
->>>>>>> dev
    * Add a new computer part to the stage and set timeout to repeat.
    */
   addComputerPart() {
