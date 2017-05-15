@@ -73,10 +73,16 @@ export default class PartsTracker extends Phaser.Group {
    * To be called by the parent state's `update()` method.
    */
   updateCallback() {
+    let totalParts = 0;
     _.each(this.partsList, (pt, i) => {
       if (_.find(this.game.world.store.match.parts, ['name', pt])) {
         this.texts[i].fill = '#BADA55';
+        totalParts += 1;
       }
     });
+
+    if (totalParts === this.partsList.length) {
+      this.game.world.store.match.ended = true;
+    }
   }
 }

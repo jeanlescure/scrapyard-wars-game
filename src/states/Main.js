@@ -18,6 +18,7 @@ export default class Main extends BaseState {
   create() {
     // Generate this match's goal.
     this.generateGoal();
+    this.game.world.store.match.started = true;
 
     // Enable arcade physics.
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -113,7 +114,7 @@ export default class Main extends BaseState {
       y: 25,
     });
 
-    computerPart.body.velocity.x = -30;
+    computerPart.body.velocity.x = -150;
 
     this.addCollisionCheck(computerPart);
     this.computerParts.push(computerPart);
@@ -121,7 +122,7 @@ export default class Main extends BaseState {
 
     this.computerPartTimeout = setTimeout(() => {
       this.addComputerPart();
-    }, 3000);
+    }, 1000);
   }
 
   /**
@@ -203,5 +204,10 @@ export default class Main extends BaseState {
       }
       return true;
     });
+
+    if (this.game.world.store.match.ended) {
+      clearTimeout(this.computerPartTimeout);
+      this.game.state.start('Scoreboard');
+    }
   }
 }
