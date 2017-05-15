@@ -44,6 +44,7 @@ export default class Tutorial extends BaseState {
       inputUpCallback: () => {
         this.readyButton.tint(0xff55aa);
         this.readyButton.changeText('WAITING');
+        this.readyButton.disableInput();
         setTimeout(() => {
           this.game.state.start('Main');
         }, 3000);
@@ -53,8 +54,6 @@ export default class Tutorial extends BaseState {
     this.game.add.existing(this.readyButton);
     this.readyButton.x = WIDTH - this.readyButton.width - 40;
     this.readyButton.y = HEIGHT - this.readyButton.height - 40;
-
-    this.game.world.store.howlManager.fadeStopHowl('introMusic');
   }
 
   /**

@@ -70,6 +70,9 @@ export default class Main extends BaseState {
 
   /**
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> dev
    * Generate this match's goal. Done dynamically as to not
    * be affected by future changes in price multipliers
    * and specs of PART_TYPES array.
@@ -106,8 +109,11 @@ export default class Main extends BaseState {
   }
 
   /**
+<<<<<<< HEAD
 =======
 >>>>>>> master
+=======
+>>>>>>> dev
    * Add a new computer part to the stage and set timeout to repeat.
    */
   addComputerPart() {
@@ -117,7 +123,7 @@ export default class Main extends BaseState {
       y: 25,
     });
 
-    computerPart.body.velocity.x = -30;
+    computerPart.body.velocity.x = -150;
 
     this.addCollisionCheck(computerPart);
     this.computerParts.push(computerPart);
@@ -125,7 +131,7 @@ export default class Main extends BaseState {
 
     this.computerPartTimeout = setTimeout(() => {
       this.addComputerPart();
-    }, 3000);
+    }, 1000);
   }
 
   /**
@@ -210,6 +216,8 @@ export default class Main extends BaseState {
 
     if (this.game.world.store.match.ended) {
       clearTimeout(this.computerPartTimeout);
+
+      this.game.world.store.howlManager.stopHowl('gameMusic');
       this.game.state.start('Scoreboard');
     }
   }
