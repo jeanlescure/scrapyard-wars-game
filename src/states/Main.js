@@ -6,7 +6,7 @@ import PartsTracker from '../objects/PartsTracker';
 import ConveyorBelt from '../objects/ConveyorBelt';
 import Linus from '../objects/Linus';
 import ComputerPart from '../objects/ComputerPart';
-import {WIDTH, HEIGHT, PART_TYPES} from '../Constants';
+import {WIDTH, HEIGHT, PART_TYPES, PARTS_SPEED} from '../Constants';
 
 /**
  * Setup and display the main game state.
@@ -114,7 +114,7 @@ export default class Main extends BaseState {
       y: 25,
     });
 
-    computerPart.body.velocity.x = -150;
+    computerPart.body.velocity.x = PARTS_SPEED;
 
     this.addCollisionCheck(computerPart);
     this.computerParts.push(computerPart);
@@ -122,7 +122,7 @@ export default class Main extends BaseState {
 
     this.computerPartTimeout = setTimeout(() => {
       this.addComputerPart();
-    }, 1000);
+    }, 2000);
   }
 
   /**

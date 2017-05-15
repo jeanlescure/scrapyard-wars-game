@@ -70,9 +70,12 @@ export const CONVEYOR_BELT_ANIMATIONS = [
   {
     name: 'move',
     frames: Array.from(Array(64).keys()), // Array: [ 0 ... 63 ]
-    speed: 30,
+    speed: 60,
   },
 ];
+
+// Parts speed
+export const PARTS_SPEED = -45;
 
 // Part types
 export const PART_TYPES = [
