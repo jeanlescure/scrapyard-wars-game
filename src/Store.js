@@ -25,6 +25,7 @@ export default class Store {
       ended: false,
       score: 0,
       goal: 0,
+      parts: [],
     };
 
     // Simple object to manage sounds. E.g. `this.howls.introMusic.play`

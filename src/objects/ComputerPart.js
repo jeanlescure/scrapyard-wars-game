@@ -20,6 +20,7 @@ export default class ComputerPart extends Playable {
 
     this.partType = partType;
     this.falling = false;
+    this.caught = false;
 
     // Add the sprite to the game.
     this.game.add.existing(this);

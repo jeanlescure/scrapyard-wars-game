@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import BaseState from './BaseState';
 import GameBg from '../objects/GameBg';
 import ConveyorBelt from '../objects/ConveyorBelt';
@@ -38,18 +39,99 @@ export default class Main extends BaseState {
       y: HEIGHT,
     });
 
-    this.computerPart = new ComputerPart({
+    this.computerParts = [];
+    this.addComputerPart();
+
+    this.addUpdateable(this.conveyorBelt);
+    this.addUpdateable(this.playerOne);
+
+    this.game.world.store.howlManager.playSequence(['gameStart', 'gameMusic']);
+  }
+
+  /**
+   * Add a new computer part to the stage and set timeout to repeat.
+   */
+  addComputerPart() {
+    const computerPart = new ComputerPart({
       game: this.game,
       x: WIDTH + 64,
       y: 25,
     });
-    this.computerPart.body.velocity.x = -30;
 
-    this.addUpdateable(this.conveyorBelt);
-    this.addUpdateable(this.playerOne);
-    this.addUpdateable(this.computerPart);
+    computerPart.body.velocity.x = -30;
 
-    this.game.world.store.howlManager.playSequence(['gameStart', 'gameMusic']);
+    this.addCollisionCheck(computerPart);
+    this.computerParts.push(computerPart);
+    this.addUpdateable(computerPart);
+
+    this.computerPartTimeout = setTimeout(() => {
+      this.addComputerPart();
+    }, 3000);
+  }
+
+  /**
+   * Add the main text to the group.
+   * @param {ComputerPart} computerPart The computer part to add collision checking to.
+   */
+  addCollisionCheck(computerPart) {
+    computerPart.collisionCheck = () => {
+      // If I've been caught I shouldn't keep checking for collisions.
+      if (computerPart && !computerPart.caught) {
+        this.game.physics.arcade.collide(this.playerOne, computerPart, () => {
+          // I should be caught on Linus' basket, not his head.
+          if (computerPart.y > this.playerOne.y - 80) {
+            computerPart.caught = true;
+            computerPart.falling = false;
+
+            // Store computer part data for score calculation.
+            this.world.store.match.parts.push(computerPart.partType);
+
+            // I should not keep being checked or updated.
+            _.pull(this.computerParts, computerPart);
+            this.removeUpdateable(computerPart);
+
+            // I will go out with style
+            let tweenArgs = [
+              {y: computerPart.y - 25},
+              250,
+              Phaser.Easing.Sinusoidal.Out,
+              true,
+            ];
+            const tweenY = this.game.add.tween(computerPart).to(...tweenArgs);
+
+            tweenArgs = [
+              {alpha: 0},
+              200,
+              Phaser.Easing.Sinusoidal.Out,
+              true,
+            ];
+            this.game.add.tween(computerPart).to(...tweenArgs);
+
+            tweenArgs = [
+              {x: 0.4, y: 0.4},
+              200,
+              Phaser.Easing.Sinusoidal.Out,
+              true,
+            ];
+            this.game.add.tween(computerPart.scale).to(...tweenArgs);
+
+            // Ok, ciao
+            tweenY.onComplete.add(() => {
+              setTimeout(() => {
+                computerPart.destroy();
+              }, 10);
+            }, this);
+          }
+        });
+      }
+
+      if (computerPart && (computerPart.y > HEIGHT + 64 || computerPart.x < -64)) {
+        // I should not keep being checked or updated.
+        _.pull(this.computerParts, computerPart);
+        this.removeUpdateable(computerPart);
+        computerPart.destroy();
+      }
+    };
   }
 
   /**
@@ -57,5 +139,14 @@ export default class Main extends BaseState {
    */
   update() {
     BaseState.update.call(this);
+
+    const cps = this.computerParts.length;
+    _.each(this.computerParts, (cp) => {
+      cp.collisionCheck();
+      if (this.computerParts.length !== cps) {
+        return false;
+      }
+      return true;
+    });
   }
 }
