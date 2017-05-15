@@ -29,18 +29,18 @@ export default class Main extends BaseState {
       y: 0,
     });
 
+    this.scoreTracker = new ScoreTracker({
+      game: this.game,
+      parent: this.game.world,
+      name: 'score-tracker-group',
+    });
+
     this.conveyorBelt = new ConveyorBelt({
       game: this.game,
       x: 0,
       y: 0,
       width: WIDTH * 2,
       height: 128,
-    });
-
-    this.scoreTracker = new ScoreTracker({
-      game: this.game,
-      parent: this.game.world,
-      name: 'score-tracker-group',
     });
 
     this.playerOne = new Linus({
@@ -52,6 +52,7 @@ export default class Main extends BaseState {
     this.computerParts = [];
     this.addComputerPart();
 
+    this.addUpdateable(this.scoreTracker);
     this.addUpdateable(this.conveyorBelt);
     this.addUpdateable(this.playerOne);
 
