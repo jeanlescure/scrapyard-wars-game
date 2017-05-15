@@ -26,6 +26,7 @@ export default class TitleScreen extends BaseState {
     this.game.world.store.howlManager.playHowl('introMusic');
 
     const titleClickHandler = function titleClickHandler() {
+      this.game.world.store.reset();
       this.game.world.store.howlManager.playHowl('selected');
 
       this.game.state.start('CharacterSelect');
